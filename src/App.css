@@ -96,7 +96,8 @@ h1 {
   color: #dbeafe;
 }
 
-.reload-button {
+.reload-button,
+.demo-button {
   margin-top: 1.5rem;
   border: 0;
   border-radius: 999px;
@@ -107,7 +108,8 @@ h1 {
   cursor: pointer;
 }
 
-.reload-button:focus-visible {
+.reload-button:focus-visible,
+.demo-button:focus-visible {
   outline: 3px solid #f8fafc;
   outline-offset: 3px;
 }
