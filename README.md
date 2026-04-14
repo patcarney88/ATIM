@@ -1,34 +1,73 @@
-# ATIM 2026 — Viking Sasquatch AI Fleet Demo
+# React + TypeScript + Vite
 
-> Presented by Pat Carney, Viking Sasquatch  
-> ATIM Conference — April 15-17, 2026 | New Orleans
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## What This Is
+Currently, two official plugins are available:
 
-A live demonstration of the Viking Sasquatch AI agent fleet — real bots, real code, real deployment. Built during the presentation.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## The Fleet
+## React Compiler
 
-| Bot | Role | Model |
-|-----|------|-------|
-| 🦶 Squatchy | Lead Bot & Orchestrator | Claude Opus 4.6 |
-| ⚡ Thor | Lead Developer | Claude Sonnet |
-| 🛡️ Freyja | QA Lead | Gemini 2.5 Flash |
-| 🐺 Rollo | Security / DevOps | GPT-5.3 Codex |
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Demo Flow
+## Expanding the ESLint configuration
 
-1. **Telegram** — Pat talks to Squatchy live on stage
-2. **Slack** — Fleet discusses the project as a Tiger Team
-3. **GitHub** — Real commits and PRs from the bots
-4. **Website** — Live site shipped during the talk
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Stack
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-- React + Vite + TypeScript
-- GitHub Actions CI/CD
-- Deployed via GitHub Pages
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-## Built By
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-Viking Sasquatch AI Fleet 🦶⚡🛡️🐺  
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```

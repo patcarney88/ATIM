@@ -1,0 +1,16 @@
+:root {
+  color: #e5eefc;
+  background-color: #111827;
+}
+
+html {
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
